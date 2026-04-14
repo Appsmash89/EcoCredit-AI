@@ -18,14 +18,27 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-gray-950 font-sans antialiased text-white min-h-screen flex flex-col`}>
         {/* Global Live Market Ticker */}
-        <div className="bg-emerald-950/80 border-b border-emerald-500/30 w-full py-2 z-50 fixed top-0 overflow-hidden backdrop-blur-md">
-          <div className="whitespace-nowrap animate-marquee flex items-center space-x-12 text-sm font-bold tracking-widest text-emerald-300">
-             <span className="flex items-center"><span className="w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse"></span> LIVE CERC MARKET 2026</span>
-             <span>STEEL SECTOR EST. CCC PRICE: ₹1,250 </span>
-             <span>CEMENT SECTOR EST. CCC PRICE: ₹1,180 </span>
-             <span className="text-teal-400">TOTAL VOL. TRADED: 42M THis Month</span>
-             <span>POWER SECTOR CCC PRICE: ₹980 </span>
-             <span className="flex items-center"><span className="w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse"></span> LIVE CERC MARKET 2026</span>
+        <div className="bg-emerald-950/80 border-b border-emerald-500/30 w-full z-50 fixed top-0 flex flex-row items-center whitespace-nowrap overflow-hidden backdrop-blur-md">
+          <div className="animate-marquee inline-block">
+            {[
+              "LIVE CERC MARKET 2026",
+              "STEEL SECTOR EST. CCC PRICE: ₹1,250",
+              "CEMENT SECTOR EST. CCC PRICE: ₹1,180",
+              "TOTAL VOL. TRADED: 42M This Month",
+              "POWER SECTOR CCC PRICE: ₹980",
+              "LIVE CERC MARKET 2026"
+            ].map((item, i) => (
+              <span key={i} className="flex-shrink-0 inline-block px-4 text-sm font-bold tracking-widest text-emerald-300">
+                {item.includes("LIVE") ? (
+                  <span className="inline-flex items-center whitespace-nowrap">
+                    <span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse shrink-0"></span>
+                    <span className="whitespace-nowrap">{item}</span>
+                  </span>
+                ) : (
+                  <span className={`whitespace-nowrap ${item.includes("TOTAL") ? "text-teal-400" : ""}`}>{item}</span>
+                )}
+              </span>
+            ))}
           </div>
         </div>
         <main className="mt-10 flex-grow">

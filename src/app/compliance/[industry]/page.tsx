@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import CercCalculator from '@/components/CercCalculator';
 import ClientPageHook from './ClientPageHook';
+import Countdown from '@/components/Countdown';
 
 export async function generateStaticParams() {
   return [
@@ -34,7 +35,6 @@ export default async function ComplianceIndustryPage({ params }: { params: Promi
 
   const formattedIndustry = rawIndustry.charAt(0).toUpperCase() + rawIndustry.slice(1);
 
-  // AEO structured markup
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -49,15 +49,14 @@ export default async function ComplianceIndustryPage({ params }: { params: Promi
   };
 
   return (
-    <div className="min-h-screen pt-28 px-4 pb-16 relative">
+    <div className="min-h-screen pt-28 px-4 pb-16 relative font-sans">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       
-      {/* Structural Background */}
       <div className="absolute top-40 left-10 w-[600px] h-[600px] bg-emerald-600/5 blur-[150px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-4xl mx-auto">
          {/* Direct Answer Box (AEO Freemium Model) */}
-         <div className="bg-gray-900/80 backdrop-blur border-l-4 border-emerald-500 p-8 rounded-2xl shadow-xl mb-8 relative overflow-hidden">
+         <div className="bg-gray-900/80 backdrop-blur border-l-4 border-emerald-500 p-8 rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.1)] mb-8 relative overflow-hidden">
             <div className="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/20 blur-[40px] rounded-full"></div>
             <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
               2026 CERC Rules for the {formattedIndustry} Sector
@@ -71,6 +70,36 @@ export default async function ComplianceIndustryPage({ params }: { params: Promi
          {/* Deep Dive Hook triggers Lead Capture Modal */}
          <ClientPageHook industry={formattedIndustry} />
          
+         {/* Compliance Playbook: Deadline Math & Logic */}
+         <div className="my-16 text-center animate-fade-in-up">
+            <h2 className="text-xl md:text-2xl font-bold mb-2 uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Official 2026 Audit Deadline</h2>
+            <p className="text-gray-400 mb-8 max-w-lg mx-auto">Act before the CERC enforcement phase locks your target baseline. Don't leave your surplus revenue unclaimed.</p>
+            <Countdown />
+         </div>
+         
+         <div className="bg-[#0c1222] border border-[#1e293b] rounded-3xl p-6 md:p-10 mb-16 shadow-2xl relative overflow-hidden group hover:border-emerald-500/30 transition-colors">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] group-hover:bg-emerald-500/10 transition-colors"></div>
+            <h3 className="text-2xl font-black text-white mb-8 border-b border-gray-800 pb-4">2026 {formattedIndustry} Math Protocol</h3>
+            
+            <div className="space-y-3 font-mono text-sm md:text-base leading-relaxed bg-black/50 p-6 rounded-xl border border-gray-800/50">
+               <p className="text-emerald-400/80 mb-4">// Scenario: 5M Tonne Plant offsetting 200 CCCs</p>
+               <p className="text-gray-300"><span className="text-emerald-400 font-bold">const</span> mandatoryOffset = targetBaseline - liveEmissions;</p>
+               <br/>
+               <p className="text-gray-300"><span className="text-teal-400 font-bold">if</span> (mandatoryOffset &lt; 0) {'{'}</p>
+               <p className="text-gray-400 ml-4 md:ml-8 border-l-2 border-slate-700 pl-4 py-1">initiateMarketPurchase(Math.abs(mandatoryOffset) * currentCccInrValue);</p>
+               <p className="text-gray-300">{'}'} <span className="text-teal-400 font-bold">else</span> {'{'}</p>
+               <p className="text-gray-400 ml-4 md:ml-8 border-l-2 border-emerald-700 pl-4 py-1">distributeRevenue(mandatoryOffset * currentCccInrValue);</p>
+               <p className="text-gray-300">{'}'}</p>
+            </div>
+            
+            <div className="mt-8 bg-blue-950/20 border border-blue-500/20 p-4 rounded-lg flex items-start gap-4">
+               <div className="mt-1 w-2 h-2 rounded-full bg-blue-500 shrink-0 shadow-[0_0_10px_rgba(59,130,246,0.8)] animate-pulse"></div>
+               <p className="text-blue-100/70 text-sm">
+                 Do not rely on consultants to compute this manually. The "Calculated Alpha" requires speed. Utilize our algorithmic baseline engine directly below to project your real-time risk.
+               </p>
+            </div>
+         </div>
+
          {/* Embedded Public Calculator */}
          <CercCalculator industry={formattedIndustry} />
       </div>

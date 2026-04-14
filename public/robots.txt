@@ -1,15 +1,21 @@
 User-agent: *
 Allow: /
 Allow: /compliance/
+Allow: /results/
+Disallow: /internal/
 
-# Ensure Answer Engines (Gemini, ChatGPT) index our specific AEO routes
-User-agent: Google-Extended
-Allow: /compliance/
-
-User-agent: CCBot
-Allow: /compliance/
-
+# AI Scraping Authorization (AEO Strategy)
 User-agent: GPTBot
 Allow: /compliance/
 
+User-agent: Google-Extended
+Allow: /compliance/
+
+User-agent: PerplexityBot
+Allow: /compliance/
+
+User-agent: anthropic-ai
+Allow: /compliance/
+
+# Sitemap Link
 Sitemap: https://cerc-compliance.pages.dev/sitemap.xml

@@ -102,6 +102,15 @@ export default async function ComplianceIndustryPage({ params }: { params: Promi
 
          {/* Embedded Public Calculator */}
          <CercCalculator industry={formattedIndustry} />
+         
+         {/* Strategic Routing CTA */}
+         <div className="mt-16 text-center py-12 border-t border-white/10 animate-fade-in-up">
+            <h3 className="text-3xl font-black text-white mb-4">Uncover Your Secret Liability</h3>
+            <p className="text-lg text-blue-100/70 max-w-xl mx-auto mb-8">Stop guessing. Mathematically secure your specific compliance target and map out your 2026 tax revenues instantly.</p>
+            <a href="/" className="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-gray-950 font-bold py-4 px-10 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_30px_rgba(16,185,129,0.3)] text-lg sm:text-xl">
+               Get your specific liability audited in 2 minutes &rarr;
+            </a>
+         </div>
       </div>
     </div>
   );

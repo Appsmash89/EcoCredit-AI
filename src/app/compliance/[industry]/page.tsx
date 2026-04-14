@@ -12,16 +12,27 @@ export async function generateStaticParams() {
   ];
 }
 
-export function generateMetadata({ params }: { params: { industry: string } }): Metadata {
-  const industry = params.industry.charAt(0).toUpperCase() + params.industry.slice(1);
+export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const rawIndustry = resolvedParams?.industry;
+  if (!rawIndustry) return { title: 'CERC Compliance', description: 'CERC CCC Compliance Hub' };
+
+  const industry = rawIndustry.charAt(0).toUpperCase() + rawIndustry.slice(1);
   return {
     title: `${industry} Sector 2026 CERC Compliance & CCC Calculator`,
     description: `Definitive Answer-First guide and CCC calculator for the ${industry} sector under the new February 2026 CCTS Gazetted regulations in India.`,
   };
 }
 
-export default function ComplianceIndustryPage({ params }: { params: { industry: string } }) {
-  const formattedIndustry = params.industry.charAt(0).toUpperCase() + params.industry.slice(1);
+export default async function ComplianceIndustryPage({ params }: { params: Promise<{ industry: string }> }) {
+  const resolvedParams = await params;
+  const rawIndustry = resolvedParams?.industry;
+  
+  if (!rawIndustry) {
+     return <div className="min-h-screen pt-28 px-4 pb-16 text-white text-center text-xl">Sector data not available.</div>;
+  }
+
+  const formattedIndustry = rawIndustry.charAt(0).toUpperCase() + rawIndustry.slice(1);
 
   // AEO structured markup
   const jsonLd = {

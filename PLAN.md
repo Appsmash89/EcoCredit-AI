@@ -28,4 +28,5 @@ Legally accurate math is crucial. Our calculators will integrate the latest 2026
 * **Language:** TypeScript
 * **Styling:** Tailwind CSS (with highly customized modern tokens, glassmorphism, dark mode)
 * **State Management:** React Context / Zustand for the complex calculator state.
-* **Hosting/Deploy:** Vercel / Edge Network for zero-latency calculator evaluations.
+* **Hosting/Deploy:** Cloudflare Pages (Free Edge Network) using `@cloudflare/next-on-pages` with KV Database hybrid edge architecture for zero-latency calculator evaluations.
+* **DevOps/Version Control:** Code tracking and version control are synchronized to Cloudflare Pages exclusively via the CEO's GitHub Desktop GUI. Going forward, focus purely on AEO and UI logic rather than terminal Git commands.
